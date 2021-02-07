@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
 {
@@ -15,10 +16,10 @@ public class GameManager : MonoBehaviour
     }
 
     public int aaaa = 100;
-
+    [SerializeField] Text textQuestion;
     public TileManager tileManager;
     public StageManager stageManger;
-    int answer;
+    public  int answer;
 
     string lastWord;
 
@@ -37,6 +38,12 @@ public class GameManager : MonoBehaviour
         answer = 0;
     }
 
+
+    private void Update()
+    {
+        Debug.Log(answer+"answer");
+        TextController();
+    }
     public void OnClick(TileManager tile)
     {
         string comWord = "ごりら";
@@ -71,5 +78,31 @@ public class GameManager : MonoBehaviour
             }
         }
         return null;
+    }
+
+    public void TextController()
+    {
+        if (answer == 0)
+        {
+            
+        }
+        else if(answer == 1)
+        {
+            textQuestion.text = "第2問「ゴ」から始まるものは？";
+        }
+        else if (answer == 2)
+        {
+            textQuestion.text = "第3問「ラ」から始まるものは？";
+        }
+        else if (answer == 3)
+        {
+            textQuestion.text = "第4問「パ」から始まるものは？";
+        }
+        else if (answer == 4)
+        {
+            textQuestion.text = "";
+        }
+
+
     }
 }

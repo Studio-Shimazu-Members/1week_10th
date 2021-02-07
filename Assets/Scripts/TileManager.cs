@@ -33,10 +33,11 @@ public class TileManager : MonoBehaviour
     void Start()
     {
         // GameManagerの関数を使う
-        Debug.Log(GameManager.instance.aaaa);
-        GameManager.instance.OnClick(this);
-        this.type = TileType.APPLE;
-        this.appleSprite = null;
+       // Debug.Log(GameManager.instance.aaaa);
+       // GameManager.instance.OnClick(this);
+       
+      //  this.type = TileType.APPLE;
+     //   this.appleSprite = null;
 
         // GameManager gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
         // オブジェクトの取得方法
@@ -89,28 +90,91 @@ public class TileManager : MonoBehaviour
 
     public void OnTile()
     {
-       
+       if(GameManager.instance.answer == 0)
+        {
             AfterCorrectFinishTile0();
-       
+        }
+       else if (GameManager.instance.answer == 1)
+        {
+            AfterCorrectFinishTile1();
+        }
+        else if (GameManager.instance.answer == 2)
+        {
+            AfterCorrectFinishTile2();
+        }
+        else if (GameManager.instance.answer == 3)
+        {
+            AfterCorrectFinishTile3();
+        }
     }
 
     public void AfterCorrectFinishTile0()
     {
+        Debug.Log("no.0");
         if (type == TileType.APPLE)
         {
             SetType(TileType.FINISH);
+           GameManager.instance.answer = 1;
         }
         else if (type == TileType.GOLIRA)
         {
-            SetType(TileType.FINISH);
+            SetType(TileType.GOLIRA);
         }
         else if (type == TileType.RAPPA)
         {
-            SetType(TileType.FINISH);
+            SetType(TileType.RAPPA);
         }
         else if (type == TileType.PANTSU)
         {
+            SetType(TileType.PANTSU);
+        }
+
+    }
+
+
+    public void AfterCorrectFinishTile1()
+    {
+        Debug.Log("no.1");
+
+        if (type == TileType.GOLIRA)
+        {
             SetType(TileType.FINISH);
+            GameManager.instance.answer += 1;
+        }
+        else if (type == TileType.RAPPA)
+        {
+            SetType(TileType.RAPPA);
+        }
+        else if (type == TileType.PANTSU)
+        {
+            SetType(TileType.PANTSU);
+        }
+
+    }
+
+
+    public void AfterCorrectFinishTile2()
+    {
+        Debug.Log("no.2");
+        if (type == TileType.RAPPA)
+        {
+            SetType(TileType.FINISH);
+            GameManager.instance.answer += 1;
+        }
+        else if (type == TileType.PANTSU)
+        {
+            SetType(TileType.PANTSU);
+        }
+
+    }
+
+    public void AfterCorrectFinishTile3()
+    {
+        Debug.Log("no.3");
+       if (type == TileType.PANTSU)
+        {
+            SetType(TileType.FINISH);
+            GameManager.instance.answer += 1;
         }
 
     }
