@@ -20,7 +20,7 @@ public class TileManager : MonoBehaviour
     public Sprite rappaSprite;
     public Sprite pantsuSprite;
     public Sprite finishSprite;
-
+    
     SpriteRenderer spriteRenderer;
     void Awake()
     {
@@ -30,7 +30,17 @@ public class TileManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+        // GameManagerの関数を使う
+        Debug.Log(GameManager.instance.aaaa);
+        GameManager.instance.OnClick(this);
+        this.type = TileType.APPLE;
+        this.appleSprite = null;
+
+        // GameManager gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
+        // オブジェクトの取得方法
+        // ・public か　[SerializeField]
+        // ・static
+        // ・GameObject.Find("")// ヒエラルキーから探してくる
     }
 
     // Update is called once per frame
