@@ -20,7 +20,9 @@ public class TileManager : MonoBehaviour
     public Sprite rappaSprite;
     public Sprite pantsuSprite;
     public Sprite finishSprite;
-    
+
+    public List<string> words = new List<string>();
+
     SpriteRenderer spriteRenderer;
     void Awake()
     {
@@ -54,6 +56,7 @@ public class TileManager : MonoBehaviour
     {
         type = tileType;
         SetImage(type);
+        // データベースからデータを引っ張ってきて、設定する
     }
 
 

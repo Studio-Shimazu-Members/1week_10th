@@ -8,6 +8,8 @@ public class StageManager : MonoBehaviour
     TileType[,] tileTable;
     public TileManager tilePrefab;
 
+    // タイルの情報を全て持っている
+    public TileManager[,] tiles = new TileManager[2, 2];
     // Start is called before the first frame update
     void Start()
     {
