@@ -84,7 +84,7 @@ public class GameManager : MonoBehaviour
     {
         if (answer == 0)
         {
-            
+            textQuestion.text = "第1問「リ」から始まるものは？";
         }
         else if(answer == 1)
         {
