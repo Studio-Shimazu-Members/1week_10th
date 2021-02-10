@@ -151,8 +151,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   type: 0
-  appleSprite: {fileID: 21300000, guid: 4d272eb4ef6c3db4f8e0994c89bbf028, type: 3}
-  goliraSprite: {fileID: 21300000, guid: f0d2b42f96060694d8818a17f8a168e9, type: 3}
-  rappaSprite: {fileID: 21300000, guid: ce9a4b05540acd94ca58edf067ee2cf4, type: 3}
-  pantsuSprite: {fileID: 21300000, guid: 14148367685862d49977a1b7099a7266, type: 3}
+  appleSprite: {fileID: -8542144991284638933, guid: 5e1d92e0979664bcdb6252a32199491b,
+    type: 3}
+  goliraSprite: {fileID: 3463718570103139430, guid: 5e1d92e0979664bcdb6252a32199491b,
+    type: 3}
+  rappaSprite: {fileID: 235912782002788156, guid: 5e1d92e0979664bcdb6252a32199491b,
+    type: 3}
+  pantsuSprite: {fileID: 4676322624552895270, guid: 5e1d92e0979664bcdb6252a32199491b,
+    type: 3}
   finishSprite: {fileID: 21300000, guid: bcd39a9962e548148beab6bf5ab3f224, type: 3}
+  words: []
