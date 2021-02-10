@@ -9,8 +9,32 @@ public class PanelManager : MonoBehaviour
     [SerializeField] Transform panelParent = default;
     PanelCore[] panelCores;
 
+    [SerializeField] MessagePanel messagePanel = default;
+    [SerializeField] ResultPanel resultPanel = default;
+    // 最後に選んだ文字
+    string lastWord;
+
     private void Start()
     {
+        Setup();
+    }
+
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.R) && Input.GetKeyDown(KeyCode.D))
+        {
+            Setup();
+        }
+        if (Input.GetKeyDown(KeyCode.T) && Input.GetKeyDown(KeyCode.D))
+        {
+            ShowResult();
+        }
+    }
+
+    void Setup()
+    {
+        resultPanel.HidePanel();
+        lastWord = "しりとり";
         // 表示用のオブジェクトを取得
         panelCores = panelParent.GetComponentsInChildren<PanelCore>();
         // データベースからランダムにデータを取得
@@ -19,11 +43,13 @@ public class PanelManager : MonoBehaviour
         SetPanels(randomDataSet);
     }
 
+    // データベースのデータ反映
     void SetPanels(Panel[] panels)
     {
         for (int i = 0; i < panelCores.Length; i++)
         {
             panelCores[i].SetPanel(panels[i]);
+            panelCores[i].ClickAction = PanelClickAction;
         }
     }
 
@@ -39,6 +65,7 @@ public class PanelManager : MonoBehaviour
         {
             // ランダムに選んで格納
             int r = Random.Range(0, databaseCopy.Count);
+            r = 0;
             panels[i] = databaseCopy[r];
             // 選んだものは除外
             databaseCopy.RemoveAt(r);
@@ -47,9 +74,44 @@ public class PanelManager : MonoBehaviour
                 break;
             }
         }
-
         return panels;
     }
 
 
+    // ゲーム中の処理
+    // パネルをクリックした時の処理：この関数をパネルに渡しておく
+    public void PanelClickAction(PanelCore panelCore)
+    {
+        string nextWord = NextWord(panelCore.PanelData);
+        if (string.IsNullOrEmpty(nextWord))
+        {
+            Debug.Log("NG");
+        }
+        else
+        {
+            Debug.Log("正解！"+ nextWord);
+            lastWord = nextWord;
+            panelCore.HidePanel();
+        }
+    }
+
+    string NextWord(Panel panel)
+    {
+        // panelのwordsの中で一致するものを探す
+        foreach(string word in panel.words)
+        {
+            Debug.Log(word);
+
+            if (word[0] == lastWord[lastWord.Length - 1])
+            {
+                return word;
+            } 
+        }
+        return "";
+    }
+
+    void ShowResult()
+    {
+        resultPanel.ShowPanel();
+    }
 }
