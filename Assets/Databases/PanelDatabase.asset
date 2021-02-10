@@ -1,0 +1,23 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f06fae8210d25544c9fb770d8fb0226f, type: 3}
+  m_Name: PanelDatabase
+  m_EditorClassIdentifier: 
+  tileList:
+  - sprite: {fileID: -8542144991284638933, guid: 5e1d92e0979664bcdb6252a32199491b,
+      type: 3}
+    words:
+    - "\u308A\u3093\u3054"
+  - sprite: {fileID: 3463718570103139430, guid: 5e1d92e0979664bcdb6252a32199491b,
+      type: 3}
+    words:
+    - "\u3054\u308A\u3089"
