@@ -9,6 +9,8 @@ public class PanelManager : MonoBehaviour
     [SerializeField] Transform panelParent = default;
     PanelCore[] panelCores;
 
+    [SerializeField] MessagePanel messagePanel = default;
+    [SerializeField] ResultPanel resultPanel = default;
     // 最後に選んだ文字
     string lastWord;
 
@@ -23,10 +25,15 @@ public class PanelManager : MonoBehaviour
         {
             Setup();
         }
+        if (Input.GetKeyDown(KeyCode.T) && Input.GetKeyDown(KeyCode.D))
+        {
+            ShowResult();
+        }
     }
 
     void Setup()
     {
+        resultPanel.HidePanel();
         lastWord = "しりとり";
         // 表示用のオブジェクトを取得
         panelCores = panelParent.GetComponentsInChildren<PanelCore>();
@@ -101,5 +108,10 @@ public class PanelManager : MonoBehaviour
             } 
         }
         return "";
+    }
+
+    void ShowResult()
+    {
+        resultPanel.ShowPanel();
     }
 }
