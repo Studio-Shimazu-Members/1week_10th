@@ -14,8 +14,20 @@ public class PanelManager : MonoBehaviour
 
     private void Start()
     {
+        Setup();
+    }
+
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.R) && Input.GetKeyDown(KeyCode.D))
+        {
+            Setup();
+        }
+    }
+
+    void Setup()
+    {
         lastWord = "しりとり";
-        // Random.InitState(3);
         // 表示用のオブジェクトを取得
         panelCores = panelParent.GetComponentsInChildren<PanelCore>();
         // データベースからランダムにデータを取得
@@ -61,9 +73,9 @@ public class PanelManager : MonoBehaviour
 
     // ゲーム中の処理
     // パネルをクリックした時の処理：この関数をパネルに渡しておく
-    public void PanelClickAction(Panel panel)
+    public void PanelClickAction(PanelCore panelCore)
     {
-        string nextWord = NextWord(panel);
+        string nextWord = NextWord(panelCore.PanelData);
         if (string.IsNullOrEmpty(nextWord))
         {
             Debug.Log("NG");
@@ -72,6 +84,7 @@ public class PanelManager : MonoBehaviour
         {
             Debug.Log("正解！"+ nextWord);
             lastWord = nextWord;
+            panelCore.HidePanel();
         }
     }
 

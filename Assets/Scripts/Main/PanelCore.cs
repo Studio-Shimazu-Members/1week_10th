@@ -9,8 +9,12 @@ public class PanelCore : MonoBehaviour
     Image image;
 
     Panel panelData;
+    public Panel PanelData
+    {
+        get => panelData;
+    }
 
-    public UnityAction<Panel> ClickAction;
+    public UnityAction<PanelCore> ClickAction;
 
     private void Awake()
     {
@@ -25,6 +29,11 @@ public class PanelCore : MonoBehaviour
 
     public void OnClick()
     {
-        ClickAction.Invoke(panelData);
+        ClickAction.Invoke(this);
+    }
+
+    public void HidePanel()
+    {
+        image.sprite = null;
     }
 }
