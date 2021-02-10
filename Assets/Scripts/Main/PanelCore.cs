@@ -1,14 +1,16 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.UI;
 
 public class PanelCore : MonoBehaviour
 {
     Image image;
 
-
     Panel panelData;
+
+    public UnityAction<Panel> ClickAction;
 
     private void Awake()
     {
@@ -19,5 +21,10 @@ public class PanelCore : MonoBehaviour
     {
         panelData = panel;
         image.sprite = panel.sprite;
+    }
+
+    public void OnClick()
+    {
+        ClickAction.Invoke(panelData);
     }
 }
