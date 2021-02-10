@@ -26,6 +26,7 @@ public class GameManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        SoundManager.instance.PlayBGM(SoundManager.BGM.Main);
         string aa = "りんご";
         Debug.Log(aa[0]);
         Debug.Log(aa[aa.Length-1]);
