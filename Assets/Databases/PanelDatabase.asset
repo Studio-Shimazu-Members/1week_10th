@@ -16,7 +16,7 @@ MonoBehaviour:
   - sprite: {fileID: -8542144991284638933, guid: 5e1d92e0979664bcdb6252a32199491b,
       type: 3}
     words:
-    - "\u308A\u3093\u3054"
+    - "\u308A\u3093\u3053"
   - sprite: {fileID: 3463718570103139430, guid: 5e1d92e0979664bcdb6252a32199491b,
       type: 3}
     words:

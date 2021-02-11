@@ -1,6 +1,8 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System.Text;
+
 
 public class PanelManager : MonoBehaviour
 {
@@ -136,12 +138,26 @@ public class PanelManager : MonoBehaviour
         // panelのwordsの中で一致するものを探す
         foreach(string word in panel.words)
         {
-            Debug.Log(word);
+            //Debug.Log(word);
+            //UTF-8 NFDで他の文字と結合すると濁点になるもの
+            char dakuten1 = '\x3099';
+            //UTF-8 NFDで他の文字と結合すると半濁点になるもの
+            char dakuten2 = '\x309A';
+            //くっつけてNFCにNormalize
+             string add = (lastWord + dakuten1).Normalize(NormalizationForm.FormC);
+             string bdd = word[0].ToString() ;
+             string cdd = (bdd+ dakuten1).Normalize(NormalizationForm.FormC)+"あああ";
+            //Debug.Log(cdd);
 
-            if (word[0] == lastWord[lastWord.Length - 1])
+            //Word の頭文字、lastWord の最後の文字
+            if (word[0] == lastWord[lastWord.Length - 1] || word[0] == add[add.Length - 1] || cdd[0] == lastWord[lastWord.Length - 1])
             {
                 return word;
-            } 
+            }
+            
+
+         
+
         }
         return "";
     }
