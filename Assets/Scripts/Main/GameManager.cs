@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
@@ -20,6 +21,8 @@ public class GameManager : MonoBehaviour
     public TileManager tileManager;
     public StageManager stageManger;
     public  int answer;
+    public Timer timer;
+    public ScoreManager scoreManager;
 
     string lastWord;
 
@@ -27,23 +30,24 @@ public class GameManager : MonoBehaviour
     void Start()
     {
         SoundManager.instance.PlayBGM(SoundManager.BGM.Main);
-        string aa = "りんご";
-        Debug.Log(aa[0]);
-        Debug.Log(aa[aa.Length-1]);
-        lastWord = "りんご";
+     //   string aa = "りんご";
+      //  Debug.Log(aa[0]);
+      //  Debug.Log(aa[aa.Length-1]);
+      //  lastWord = "りんご";
 
         stageManger.LoadStageFromText();
         stageManger.DebugTable();
-        //Instantiate(tilePrefab);
+       // Instantiate(tilePrefab);
         stageManger.CreateStage();
         answer = 0;
+        timer.StartTime();
     }
 
 
     private void Update()
     {
-        Debug.Log(answer+"answer");
-        TextController();
+       
+        //TextController();
     }
     public void OnClick(TileManager tile)
     {
@@ -81,29 +85,15 @@ public class GameManager : MonoBehaviour
         return null;
     }
 
-    public void TextController()
+    public void LoadScene()
     {
-        if (answer == 0)
-        {
-            textQuestion.text = "第1問「リ」から始まるものは？";
-        }
-        else if(answer == 1)
-        {
-            textQuestion.text = "第2問「ゴ」から始まるものは？";
-        }
-        else if (answer == 2)
-        {
-            textQuestion.text = "第3問「ラ」から始まるものは？";
-        }
-        else if (answer == 3)
-        {
-            textQuestion.text = "第4問「パ」から始まるものは？";
-        }
-        else if (answer == 4)
-        {
-            textQuestion.text = "";
-        }
-
-
+        Scene thisScene = SceneManager.GetActiveScene();
+        SceneManager.LoadScene(thisScene.name);
     }
+
+    public void RankingScene()
+    {
+        SceneManager.LoadScene("Ranking");
+    }
+
 }

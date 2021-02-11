@@ -8,7 +8,10 @@ public class MessagePanel : MonoBehaviour
 
     [SerializeField] Text messageText = default;
 
-    
+    private void Update()
+    {
+        
+    }
 
 
     public void UpdateMessage(string message)

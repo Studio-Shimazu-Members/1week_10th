@@ -6,7 +6,7 @@ using UnityEngine.UI;
 
 public class Timer : MonoBehaviour
 {
-    const int TIME_MAX = 10;
+    const int TIME_MAX = 60;
     int countTime = TIME_MAX;
 
     Text timerText;
@@ -22,6 +22,10 @@ public class Timer : MonoBehaviour
     // 時間切れの場合に実行したい関数を登録する
     public UnityAction TimeUpAction;
 
+    private void Start()
+    {
+        StartTime();
+    }
 
     // カウントダウンを開始する
     public void StartTime()

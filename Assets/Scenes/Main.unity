@@ -246,6 +246,18 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ba1332090ce554484abe0485345bb225, type: 3}
+--- !u!114 &84783637 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1346519686589339064, guid: 36c623c328f5ff149a4f981c71f9aba3,
+    type: 3}
+  m_PrefabInstance: {fileID: 1855879953}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 762db3caeb0a7074daceec5bec45908e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &107053494
 GameObject:
   m_ObjectHideFlags: 0
@@ -335,6 +347,7 @@ GameObject:
   - component: {fileID: 107500616}
   - component: {fileID: 107500619}
   - component: {fileID: 107500618}
+  - component: {fileID: 107500617}
   m_Layer: 5
   m_Name: BackgroundPanel
   m_TagString: Untagged
@@ -364,6 +377,20 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &107500617
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 107500615}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 184d89bd894845c4cbdb65933817fc84, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  scoreManager: {fileID: 1983134564}
+  resultscoreText: {fileID: 419974394}
 --- !u!114 &107500618
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -735,6 +762,56 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 251614174}
   m_CullTransparentMesh: 0
+--- !u!1 &299615903
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 299615905}
+  - component: {fileID: 299615904}
+  m_Layer: 0
+  m_Name: GameManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &299615904
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 299615903}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cd6eb7d867e9f224f906d09707cbe64e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  aaaa: 100
+  textQuestion: {fileID: 0}
+  tileManager: {fileID: 0}
+  stageManger: {fileID: 0}
+  answer: 0
+  timer: {fileID: 1417805061}
+  scoreManager: {fileID: 1983134564}
+--- !u!4 &299615905
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 299615903}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 8
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &340693041
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1929,7 +2006,18 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1132407565}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 299615904}
+        m_MethodName: RankingScene
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1132407565
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3054,6 +3142,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   panel: {fileID: 107500615}
+  gameManager: {fileID: 299615904}
+  soundManager: {fileID: 84783637}
+  resultScore: {fileID: 107500617}
 --- !u!224 &1696777300
 RectTransform:
   m_ObjectHideFlags: 0
@@ -3155,7 +3246,18 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1742469347}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 299615904}
+        m_MethodName: LoadScene
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1742469347
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3628,6 +3730,8 @@ MonoBehaviour:
   panelParent: {fileID: 199453549}
   messagePanel: {fileID: 1836648806}
   resultPanel: {fileID: 1696777299}
+  ScoreManager: {fileID: 1983134564}
+  timer: {fileID: 1417805061}
 --- !u!4 &1960001640
 Transform:
   m_ObjectHideFlags: 0
@@ -3698,6 +3802,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 08f695208550d4629b46f2406aa5d18a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  scoreText: {fileID: 0}
 --- !u!114 &1983134565
 MonoBehaviour:
   m_ObjectHideFlags: 0

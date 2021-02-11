@@ -12,11 +12,16 @@ public class ScoreManager : MonoBehaviour
     // 学習ポイント：プロパティってのを使えば、外部から取得できるけど設定はできない変数が作れるよ！（スコアの変更はこいつの仕事）
     public int Score { get; private set; }
 
-    Text scoreText = default;
+    public Text scoreText = default;
 
     private void Awake()
     {
         scoreText = GetComponent<Text>();
+    }
+
+    private void Start()
+    {
+        Init();
     }
 
     // 初期化

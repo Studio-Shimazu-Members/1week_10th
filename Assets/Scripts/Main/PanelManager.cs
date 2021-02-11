@@ -11,6 +11,10 @@ public class PanelManager : MonoBehaviour
 
     [SerializeField] MessagePanel messagePanel = default;
     [SerializeField] ResultPanel resultPanel = default;
+
+    public ScoreManager ScoreManager;
+    public Timer timer;
+    
     // 最後に選んだ文字
     string lastWord;
     string wrongAnswer = "ちがうよ！";
@@ -107,7 +111,7 @@ public class PanelManager : MonoBehaviour
             Debug.Log("NG");
             messagePanel.UpdateMessage(wrongAnswer);
             StartCoroutine("WrongText");
-
+            timer.Penalty(6);
         }
         else
         {
@@ -116,6 +120,7 @@ public class PanelManager : MonoBehaviour
             panelCore.HidePanel();
             messagePanel.UpdateMessage(nextWord+"なのか！！");
             StartCoroutine("CorrectText" );
+            ScoreManager.ScoreUp(nextWord.Length);
         }
     }
 
