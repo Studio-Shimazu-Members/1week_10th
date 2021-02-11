@@ -57,6 +57,9 @@ public class SoundManager : MonoBehaviour
     public void PlaySE(SE se)
     {
         int index = (int)se;
+        Debug.Log(index);
+        Debug.Log(seList[index]);
+        Debug.Log(audioSourceSE);
         audioSourceSE.PlayOneShot(seList[index]);
     }
 
