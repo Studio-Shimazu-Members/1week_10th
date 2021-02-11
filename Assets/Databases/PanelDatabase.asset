@@ -16,11 +16,11 @@ MonoBehaviour:
   - sprite: {fileID: -8542144991284638933, guid: 5e1d92e0979664bcdb6252a32199491b,
       type: 3}
     words:
-    - "\u308A\u3093\u3053"
+    - "\u308A\u3093\u3071"
   - sprite: {fileID: 3463718570103139430, guid: 5e1d92e0979664bcdb6252a32199491b,
       type: 3}
     words:
-    - "\u3054\u308A\u3089"
+    - "\u306F\u308A\u3089"
   - sprite: {fileID: 235912782002788156, guid: 5e1d92e0979664bcdb6252a32199491b, type: 3}
     words:
     - test
