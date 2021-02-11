@@ -62,7 +62,17 @@ public class Timer : MonoBehaviour
         }
     }
 
-    // Update is called once per frame
+    private void UpdateText(int time)
+    {
+        if (time < 0)
+        {
+            time = 0;
+        }
+        timerText.text = "制限時間　残り" + time.ToString("D2") + "秒";
+
+    }
+
+    // デバッグ用
     void Update()
     {
         if (Input.GetKeyDown(KeyCode.S) && Input.GetKey(KeyCode.Space))
@@ -80,13 +90,4 @@ public class Timer : MonoBehaviour
         }
     }
 
-    private void UpdateText(int time)
-    {
-        if (time < 0)
-        {
-            time = 0;
-        }
-        timerText.text = "制限時間　残り" + time.ToString("D2") + "秒";
-
-    }
 }
