@@ -13,10 +13,15 @@ public class PanelManager : MonoBehaviour
     [SerializeField] ResultPanel resultPanel = default;
     // 最後に選んだ文字
     string lastWord;
+    string wrongAnswer = "ちがうよ！";
+
+
 
     private void Start()
     {
         Setup();
+    
+        messagePanel.UpdateMessage(lastWord[lastWord.Length - 1] + "ではじまるのは　どれだ？");
     }
 
     private void Update()
@@ -29,6 +34,8 @@ public class PanelManager : MonoBehaviour
         {
             ShowResult();
         }
+       
+
     }
 
     void Setup()
@@ -86,12 +93,17 @@ public class PanelManager : MonoBehaviour
         if (string.IsNullOrEmpty(nextWord))
         {
             Debug.Log("NG");
+            messagePanel.UpdateMessage(wrongAnswer);
+            StartCoroutine("WrongText");
+
         }
         else
         {
             Debug.Log("正解！"+ nextWord);
             lastWord = nextWord;
             panelCore.HidePanel();
+            messagePanel.UpdateMessage(nextWord+"なのか！！");
+            StartCoroutine("CorrectText" );
         }
     }
 
@@ -113,5 +125,31 @@ public class PanelManager : MonoBehaviour
     void ShowResult()
     {
         resultPanel.ShowPanel();
+    }
+
+
+
+    IEnumerator CorrectText()
+    {
+        //ここに処理を書く
+        Debug.Log("正解作動");
+        //1フレーム停止
+        yield return new WaitForSeconds(1);
+
+        //ここに再開後の処理を書く
+        Debug.Log("2回目");
+        messagePanel.UpdateMessage(lastWord[lastWord.Length - 1]+ "ではじまるのは　どれだ？");
+    }
+
+    IEnumerator WrongText()
+    {
+        //ここに処理を書く
+        Debug.Log("正解作動");
+        //1フレーム停止
+        yield return new WaitForSeconds(1);
+
+        //ここに再開後の処理を書く
+        Debug.Log("2回目");
+        messagePanel.UpdateMessage(lastWord[lastWord.Length - 1] + "ではじまるのは　どれだ？");
     }
 }

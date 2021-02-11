@@ -14,7 +14,7 @@ public class TitlePresenter : MonoBehaviour
 
     public void OnNewGameButton()
     {
-        SceneManager.LoadScene("SampleScene");
+        SceneManager.LoadScene("Main");
     }
 
 }
