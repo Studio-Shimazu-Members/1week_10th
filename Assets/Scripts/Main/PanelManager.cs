@@ -7,6 +7,8 @@ using System.Globalization;
 
 public class PanelManager : MonoBehaviour
 {
+    [SerializeField] UnityEngine.UI.Text downTime = default;
+    [SerializeField] UnityEngine.UI.Text addScore = default;
     [SerializeField] Sprite hideSprite = default;
     [SerializeField] TileListEntity tileListEntity = default;
     // public const int PANEL_MAX = 20;
@@ -21,7 +23,7 @@ public class PanelManager : MonoBehaviour
     
     // 最後に選んだ文字
     string lastWord;
-    string wrongAnswer = "ちがうよ！";
+    string wrongAnswer = "ぜんぜんちがうよ！";
 
     // 人を入れるアイデア
     // ・データベースの0番を人にする
@@ -38,6 +40,9 @@ public class PanelManager : MonoBehaviour
 
     void Setup()
     {
+        addScore.gameObject.SetActive(false);
+        downTime.gameObject.SetActive(false);
+        SoundManager.instance.PlayBGM(SoundManager.BGM.Main);
         resultPanel.HidePanel();
         lastWord = "しりとり";
         // 表示用のオブジェクトを取得
@@ -103,6 +108,8 @@ public class PanelManager : MonoBehaviour
         {
             messagePanel.UpdateMessage(wrongAnswer);
             timer.Penalty(6);
+            downTime.gameObject.SetActive(true);
+            downTime.text = "-6";
             SoundManager.instance.PlaySE(SoundManager.SE.Wrong);
         }
         else if (nextWord.EndsWith("ん"))
@@ -118,6 +125,8 @@ public class PanelManager : MonoBehaviour
             panelCore.HidePanel(hideSprite);
             messagePanel.UpdateMessage(nextWord + "なのか！！");
             scoreManager.ScoreUp(lastWord.Length);
+            addScore.gameObject.SetActive(true);
+            addScore.text = "+"+lastWord.Length;
             SoundManager.instance.PlaySE(SoundManager.SE.Correct);
         }
         StartCoroutine(CorrectText());
@@ -126,6 +135,8 @@ public class PanelManager : MonoBehaviour
     IEnumerator CorrectText()
     {
         yield return new WaitForSeconds(1);
+        addScore.gameObject.SetActive(false);
+        downTime.gameObject.SetActive(false);
         messagePanel.UpdateMessage("「" + lastWord[lastWord.Length - 1] + "」ではじまるのは　どれだ？");
     }
 
