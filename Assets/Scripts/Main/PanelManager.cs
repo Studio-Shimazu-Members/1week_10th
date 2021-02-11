@@ -7,6 +7,7 @@ using System.Globalization;
 
 public class PanelManager : MonoBehaviour
 {
+    [SerializeField] Sprite hideSprite = default;
     [SerializeField] TileListEntity tileListEntity = default;
     // public const int PANEL_MAX = 20;
     [SerializeField] Transform panelParent = default;
@@ -16,7 +17,6 @@ public class PanelManager : MonoBehaviour
     [SerializeField] ResultPanel resultPanel = default;
 
     public ScoreManager scoreManager;
-    public SoundManager soundManager;
     public Timer timer;
     
     // 最後に選んだ文字
@@ -33,21 +33,7 @@ public class PanelManager : MonoBehaviour
     {
         Setup();
     
-        messagePanel.UpdateMessage(lastWord[lastWord.Length - 1] + "ではじまるのは　どれだ？");
-    }
-
-    private void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.R) && Input.GetKeyDown(KeyCode.D))
-        {
-            Setup();
-        }
-        if (Input.GetKeyDown(KeyCode.T) && Input.GetKeyDown(KeyCode.D))
-        {
-            ShowResult();
-        }
-       
-
+        messagePanel.UpdateMessage("「"+lastWord[lastWord.Length - 1] + "」ではじまるのは　どれだ？");
     }
 
     void Setup()
@@ -112,19 +98,27 @@ public class PanelManager : MonoBehaviour
     public void PanelClickAction(PanelCore panelCore)
     {
         string nextWord = NextWord(panelCore.PanelData);
+        Debug.Log(nextWord);
         if (string.IsNullOrEmpty(nextWord))
         {
             messagePanel.UpdateMessage(wrongAnswer);
             timer.Penalty(6);
-            soundManager.PlaySE(SoundManager.SE.Wrong);
+            SoundManager.instance.PlaySE(SoundManager.SE.Wrong);
+        }
+        else if (nextWord.EndsWith("ん"))
+        {
+            Debug.Log("ゲームオーバー処理");
+            panelCore.HidePanel(hideSprite);
+            ShowResult();
+            return;
         }
         else
         {
             lastWord = nextWord;
-            panelCore.HidePanel();
+            panelCore.HidePanel(hideSprite);
             messagePanel.UpdateMessage(nextWord + "なのか！！");
             scoreManager.ScoreUp(lastWord.Length);
-            soundManager.PlaySE(SoundManager.SE.Correct);
+            SoundManager.instance.PlaySE(SoundManager.SE.Correct);
         }
         StartCoroutine(CorrectText());
     }
@@ -132,7 +126,7 @@ public class PanelManager : MonoBehaviour
     IEnumerator CorrectText()
     {
         yield return new WaitForSeconds(1);
-        messagePanel.UpdateMessage(lastWord[lastWord.Length - 1] + "ではじまるのは　どれだ？");
+        messagePanel.UpdateMessage("「" + lastWord[lastWord.Length - 1] + "」ではじまるのは　どれだ？");
     }
 
     string NextWord(Panel panel)

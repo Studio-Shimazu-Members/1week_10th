@@ -7,7 +7,7 @@ using System;
 using System.Text;
 public class ImageScroll : MonoBehaviour
 {
-
+	[SerializeField] float speed = default;
 
     private void Start()
     {
@@ -15,7 +15,7 @@ public class ImageScroll : MonoBehaviour
 
     void Update()
 	{
-		transform.Translate(0, Time.deltaTime*2f, 0);
+		transform.Translate(0, Time.deltaTime* speed, 0);
 		Debug.Log(transform.position.y);
 		if (transform.position.y > 15)
 		{

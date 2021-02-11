@@ -22,10 +22,6 @@ public class Timer : MonoBehaviour
     // 時間切れの場合に実行したい関数を登録する
     public UnityAction TimeUpAction;
 
-    private void Start()
-    {
-        StartTime();
-    }
 
     // カウントダウンを開始する
     public void StartTime()
@@ -35,6 +31,7 @@ public class Timer : MonoBehaviour
 
     IEnumerator CountDown()
     {
+        Debug.Log("CountDown");
         UpdateText(countTime);
         // 0より大きい場合は繰り返す
         while (countTime > 0)
@@ -72,26 +69,6 @@ public class Timer : MonoBehaviour
         {
             time = 0;
         }
-        timerText.text = "制限時間　残り" + time.ToString("D2") + "秒";
-
+        timerText.text = "じかん " + time.ToString("D2") + " 秒";
     }
-
-    // デバッグ用
-    void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.S) && Input.GetKey(KeyCode.Space))
-        {
-            StartTime();
-        }
-        if (Input.GetKeyDown(KeyCode.R) && Input.GetKey(KeyCode.Space))
-        {
-            ResetTime();
-        }
-
-        if (Input.GetKeyDown(KeyCode.P))
-        {
-            Penalty(6);
-        }
-    }
-
 }
