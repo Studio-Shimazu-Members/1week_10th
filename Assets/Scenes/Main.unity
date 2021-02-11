@@ -3730,7 +3730,7 @@ MonoBehaviour:
   panelParent: {fileID: 199453549}
   messagePanel: {fileID: 1836648806}
   resultPanel: {fileID: 1696777299}
-  ScoreManager: {fileID: 1983134564}
+  scoreManager: {fileID: 1983134564}
   timer: {fileID: 1417805061}
 --- !u!4 &1960001640
 Transform:

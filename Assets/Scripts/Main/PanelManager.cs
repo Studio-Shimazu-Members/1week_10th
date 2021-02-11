@@ -12,7 +12,7 @@ public class PanelManager : MonoBehaviour
     [SerializeField] MessagePanel messagePanel = default;
     [SerializeField] ResultPanel resultPanel = default;
 
-    public ScoreManager ScoreManager;
+    public ScoreManager scoreManager;
     public Timer timer;
     
     // 最後に選んだ文字
@@ -56,6 +56,7 @@ public class PanelManager : MonoBehaviour
         // 反映
         SetPanels(randomDataSet);
         SetHumanPanel(tileListEntity.tileList[0]);
+        timer.StartTime();
     }
 
     // データベースのデータ反映
@@ -108,20 +109,23 @@ public class PanelManager : MonoBehaviour
         string nextWord = NextWord(panelCore.PanelData);
         if (string.IsNullOrEmpty(nextWord))
         {
-            Debug.Log("NG");
             messagePanel.UpdateMessage(wrongAnswer);
-            StartCoroutine("WrongText");
             timer.Penalty(6);
         }
         else
         {
-            Debug.Log("正解！"+ nextWord);
             lastWord = nextWord;
             panelCore.HidePanel();
-            messagePanel.UpdateMessage(nextWord+"なのか！！");
-            StartCoroutine("CorrectText" );
-            ScoreManager.ScoreUp(nextWord.Length);
+            messagePanel.UpdateMessage(nextWord + "なのか！！");
+            scoreManager.ScoreUp(lastWord.Length);
         }
+        StartCoroutine(CorrectText());
+    }
+
+    IEnumerator CorrectText()
+    {
+        yield return new WaitForSeconds(1);
+        messagePanel.UpdateMessage(lastWord[lastWord.Length - 1] + "ではじまるのは　どれだ？");
     }
 
     string NextWord(Panel panel)
@@ -146,27 +150,5 @@ public class PanelManager : MonoBehaviour
 
 
 
-    IEnumerator CorrectText()
-    {
-        //ここに処理を書く
-        Debug.Log("正解作動");
-        //1フレーム停止
-        yield return new WaitForSeconds(1);
 
-        //ここに再開後の処理を書く
-        Debug.Log("2回目");
-        messagePanel.UpdateMessage(lastWord[lastWord.Length - 1]+ "ではじまるのは　どれだ？");
-    }
-
-    IEnumerator WrongText()
-    {
-        //ここに処理を書く
-        Debug.Log("正解作動");
-        //1フレーム停止
-        yield return new WaitForSeconds(1);
-
-        //ここに再開後の処理を書く
-        Debug.Log("2回目");
-        messagePanel.UpdateMessage(lastWord[lastWord.Length - 1] + "ではじまるのは　どれだ？");
-    }
 }

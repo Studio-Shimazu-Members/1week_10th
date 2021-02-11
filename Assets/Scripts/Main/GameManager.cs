@@ -40,7 +40,6 @@ public class GameManager : MonoBehaviour
        // Instantiate(tilePrefab);
         stageManger.CreateStage();
         answer = 0;
-        timer.StartTime();
     }
 
 
