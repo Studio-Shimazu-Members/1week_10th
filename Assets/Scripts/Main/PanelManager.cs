@@ -15,7 +15,10 @@ public class PanelManager : MonoBehaviour
     string lastWord;
     string wrongAnswer = "ちがうよ！";
 
-
+    // 人を入れるアイデア
+    // ・データベースの0番を人にする
+    // ・パネルをセットする際はデータベースの1番以上から設定する
+    // ・最後のパネルに人（データベースの0番）をセットする（現状：りんご）
 
     private void Start()
     {
@@ -48,6 +51,7 @@ public class PanelManager : MonoBehaviour
         Panel[] randomDataSet = GetRandomPanelDataSet(tileListEntity);
         // 反映
         SetPanels(randomDataSet);
+        SetHumanPanel(tileListEntity.tileList[0]);
     }
 
     // データベースのデータ反映
@@ -58,6 +62,14 @@ public class PanelManager : MonoBehaviour
             panelCores[i].SetPanel(panels[i]);
             panelCores[i].ClickAction = PanelClickAction;
         }
+    }
+
+    // 最後に人の配置
+    void SetHumanPanel(Panel human)
+    {
+        int lastIndex = panelCores.Length - 1;
+        panelCores[lastIndex].SetPanel(human);
+        panelCores[lastIndex].ClickAction = PanelClickAction;
     }
 
     // データベースからランダムにデータを持ってくる
@@ -71,8 +83,8 @@ public class PanelManager : MonoBehaviour
         for (int i=0; i < panelCores.Length; i++)
         {
             // ランダムに選んで格納
-            int r = Random.Range(0, databaseCopy.Count);
-            r = 0;
+            int r = Random.Range(1, databaseCopy.Count); // データベースの0には人を入れるから1以上
+            r = 1;
             panels[i] = databaseCopy[r];
             // 選んだものは除外
             databaseCopy.RemoveAt(r);
