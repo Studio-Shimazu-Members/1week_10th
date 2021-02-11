@@ -6,6 +6,6 @@ public class Ranking : MonoBehaviour
 {
     void Start()
     {
-        naichilab.RankingLoader.Instance.SendScoreAndShowRanking(110);
+     
     }
 }

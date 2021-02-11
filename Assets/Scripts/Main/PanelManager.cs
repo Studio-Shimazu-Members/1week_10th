@@ -148,7 +148,10 @@ public class PanelManager : MonoBehaviour
         resultPanel.ShowPanel();
     }
 
-
+    public void RankingShow()
+    {
+        naichilab.RankingLoader.Instance.SendScoreAndShowRanking(scoreManager.Score);
+    }
 
 
 }

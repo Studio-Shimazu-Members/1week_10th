@@ -2007,8 +2007,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 299615904}
-        m_MethodName: RankingScene
+      - m_Target: {fileID: 1960001639}
+        m_MethodName: RankingShow
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
