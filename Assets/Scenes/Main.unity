@@ -791,13 +791,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cd6eb7d867e9f224f906d09707cbe64e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  aaaa: 100
-  textQuestion: {fileID: 0}
-  tileManager: {fileID: 0}
-  stageManger: {fileID: 0}
-  answer: 0
-  timer: {fileID: 1417805061}
-  scoreManager: {fileID: 1983134564}
 --- !u!4 &299615905
 Transform:
   m_ObjectHideFlags: 0
@@ -1032,6 +1025,12 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 8464050730965898090, guid: ba1332090ce554484abe0485345bb225,
     type: 3}
   m_PrefabInstance: {fileID: 2091447132}
+  m_PrefabAsset: {fileID: 0}
+--- !u!82 &602407834 stripped
+AudioSource:
+  m_CorrespondingSourceObject: {fileID: 1346519686589339065, guid: 36c623c328f5ff149a4f981c71f9aba3,
+    type: 3}
+  m_PrefabInstance: {fileID: 1855879953}
   m_PrefabAsset: {fileID: 0}
 --- !u!1 &737109947 stripped
 GameObject:
@@ -3396,6 +3395,26 @@ PrefabInstance:
       propertyPath: m_Name
       value: SoundManager
       objectReference: {fileID: 0}
+    - target: {fileID: 1346519686589339064, guid: 36c623c328f5ff149a4f981c71f9aba3,
+        type: 3}
+      propertyPath: audioSourceBGM
+      value: 
+      objectReference: {fileID: 602407834}
+    - target: {fileID: 1346519686589339064, guid: 36c623c328f5ff149a4f981c71f9aba3,
+        type: 3}
+      propertyPath: seList.Array.size
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 1346519686589339064, guid: 36c623c328f5ff149a4f981c71f9aba3,
+        type: 3}
+      propertyPath: seList.Array.data[2]
+      value: 
+      objectReference: {fileID: 8300000, guid: 3d89db5988ceb7949883fb51c16102ab, type: 3}
+    - target: {fileID: 1346519686589339064, guid: 36c623c328f5ff149a4f981c71f9aba3,
+        type: 3}
+      propertyPath: bgmList.Array.data[1]
+      value: 
+      objectReference: {fileID: 8300000, guid: d2c6a461ac33be54f98c72f39296c3f1, type: 3}
     - target: {fileID: 1346519686589339067, guid: 36c623c328f5ff149a4f981c71f9aba3,
         type: 3}
       propertyPath: m_RootOrder
@@ -3731,6 +3750,7 @@ MonoBehaviour:
   messagePanel: {fileID: 1836648806}
   resultPanel: {fileID: 1696777299}
   scoreManager: {fileID: 1983134564}
+  soundManager: {fileID: 84783637}
   timer: {fileID: 1417805061}
 --- !u!4 &1960001640
 Transform:

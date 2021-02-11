@@ -13,6 +13,7 @@ public class SoundManager : MonoBehaviour
     {
         Correct,
         Wrong,
+        Finish,
 
     }
 

@@ -13,6 +13,7 @@ public class PanelManager : MonoBehaviour
     [SerializeField] ResultPanel resultPanel = default;
 
     public ScoreManager scoreManager;
+    public SoundManager soundManager;
     public Timer timer;
     
     // 最後に選んだ文字
@@ -111,6 +112,7 @@ public class PanelManager : MonoBehaviour
         {
             messagePanel.UpdateMessage(wrongAnswer);
             timer.Penalty(6);
+            soundManager.PlaySE(SoundManager.SE.Wrong);
         }
         else
         {
@@ -118,6 +120,7 @@ public class PanelManager : MonoBehaviour
             panelCore.HidePanel();
             messagePanel.UpdateMessage(nextWord + "なのか！！");
             scoreManager.ScoreUp(lastWord.Length);
+            soundManager.PlaySE(SoundManager.SE.Correct);
         }
         StartCoroutine(CorrectText());
     }

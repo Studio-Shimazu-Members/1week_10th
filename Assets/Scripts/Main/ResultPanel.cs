@@ -14,6 +14,7 @@ public class ResultPanel : MonoBehaviour
         panel.SetActive(true);
         resultScore.ResultsScore();
         soundManager.StopBGM();
+        soundManager.PlaySE(SoundManager.SE.Finish);
     }
     public void HidePanel()
     {
