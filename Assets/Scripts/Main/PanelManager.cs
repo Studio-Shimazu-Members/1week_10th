@@ -1,6 +1,9 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System.Text;
+using System;
+using System.Globalization;
 
 public class PanelManager : MonoBehaviour
 {
@@ -24,6 +27,7 @@ public class PanelManager : MonoBehaviour
     // ・データベースの0番を人にする
     // ・パネルをセットする際はデータベースの1番以上から設定する
     // ・最後のパネルに人（データベースの0番）をセットする（現状：りんご）
+
 
     private void Start()
     {
@@ -89,7 +93,7 @@ public class PanelManager : MonoBehaviour
         for (int i=0; i < panelCores.Length; i++)
         {
             // ランダムに選んで格納
-            int r = Random.Range(1, databaseCopy.Count); // データベースの0には人を入れるから1以上
+            int r = UnityEngine.Random.Range(1, databaseCopy.Count); // データベースの0には人を入れるから1以上
             r = 1;
             panels[i] = databaseCopy[r];
             // 選んだものは除外
@@ -136,12 +140,12 @@ public class PanelManager : MonoBehaviour
         // panelのwordsの中で一致するものを探す
         foreach(string word in panel.words)
         {
-            Debug.Log(word);
-
-            if (word[0] == lastWord[lastWord.Length - 1])
+            //Word の頭文字、lastWord の最後の文字
+            int result = CultureInfo.CurrentCulture.CompareInfo.IndexOf(word[0].ToString(), lastWord[lastWord.Length - 1].ToString(), CompareOptions.IgnoreNonSpace);
+            if (result == 0)
             {
                 return word;
-            } 
+            }
         }
         return "";
     }
