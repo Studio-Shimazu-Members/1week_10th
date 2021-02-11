@@ -28,22 +28,13 @@ public class ScoreManager : MonoBehaviour
     public void Init()
     {
         Score = 0;
-        scoreText.text = "スコア:" + Score;
+        scoreText.text = "スコア " + Score + " 点";
     }
 
     public void ScoreUp(int add)
     {
         Score += add;
-        scoreText.text = "スコア:" + Score;
+        scoreText.text = "スコア " + Score + " 点";
     }
 
-    // デバッグ用
-    // デバッグ用
-    void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.S) && Input.GetKey(KeyCode.Space))
-        {
-            ScoreUp("12345".Length);
-        }
-    }
 }
