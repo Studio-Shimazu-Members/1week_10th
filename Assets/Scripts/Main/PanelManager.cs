@@ -2,7 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 using System.Text;
-
+using System;
+using System.Globalization;
 
 public class PanelManager : MonoBehaviour
 {
@@ -26,6 +27,7 @@ public class PanelManager : MonoBehaviour
     // ・データベースの0番を人にする
     // ・パネルをセットする際はデータベースの1番以上から設定する
     // ・最後のパネルに人（データベースの0番）をセットする（現状：りんご）
+
 
     private void Start()
     {
@@ -91,7 +93,7 @@ public class PanelManager : MonoBehaviour
         for (int i=0; i < panelCores.Length; i++)
         {
             // ランダムに選んで格納
-            int r = Random.Range(1, databaseCopy.Count); // データベースの0には人を入れるから1以上
+            int r = UnityEngine.Random.Range(1, databaseCopy.Count); // データベースの0には人を入れるから1以上
             r = 1;
             panels[i] = databaseCopy[r];
             // 選んだものは除外
@@ -138,26 +140,12 @@ public class PanelManager : MonoBehaviour
         // panelのwordsの中で一致するものを探す
         foreach(string word in panel.words)
         {
-            //Debug.Log(word);
-            //UTF-8 NFDで他の文字と結合すると濁点になるもの
-            char dakuten1 = '\x3099';
-            //UTF-8 NFDで他の文字と結合すると半濁点になるもの
-            char dakuten2 = '\x309A';
-            //くっつけてNFCにNormalize
-             string add = (lastWord + dakuten1).Normalize(NormalizationForm.FormC);
-             string bdd = word[0].ToString() ;
-             string cdd = (bdd+ dakuten1).Normalize(NormalizationForm.FormC)+"あああ";
-            //Debug.Log(cdd);
-
             //Word の頭文字、lastWord の最後の文字
-            if (word[0] == lastWord[lastWord.Length - 1] || word[0] == add[add.Length - 1] || cdd[0] == lastWord[lastWord.Length - 1])
+            int result = CultureInfo.CurrentCulture.CompareInfo.IndexOf(word[0].ToString(), lastWord[lastWord.Length - 1].ToString(), CompareOptions.IgnoreNonSpace);
+            if (result == 0)
             {
                 return word;
             }
-            
-
-         
-
         }
         return "";
     }
