@@ -16,7 +16,8 @@ public class Timer : MonoBehaviour
     void Awake()
     {
         // 繰り返しGetComponentをするのはよくないので、最初に取得しておく
-        timerText = GetComponent<Text>(); 
+        timerText = GetComponent<Text>();
+        UpdateText(countTime);
     }
 
     // 時間切れの場合に実行したい関数を登録する
@@ -31,7 +32,6 @@ public class Timer : MonoBehaviour
 
     IEnumerator CountDown()
     {
-        Debug.Log("CountDown");
         UpdateText(countTime);
         // 0より大きい場合は繰り返す
         while (countTime > 0)
@@ -43,9 +43,11 @@ public class Timer : MonoBehaviour
         }
         // TODO:テスト用：本当はいらない
         resultPanel.ShowPanel();
+    }
 
-
-        TimeUpAction.Invoke();
+    public void StopTime()
+    {
+        StopAllCoroutines();
     }
 
     public void ResetTime()

@@ -7,6 +7,7 @@ using System.Globalization;
 
 public class PanelManager : MonoBehaviour
 {
+    [SerializeField] Animation anim = default; 
     [SerializeField] UnityEngine.UI.Text downTime = default;
     [SerializeField] UnityEngine.UI.Text addScore = default;
     [SerializeField] Sprite hideSprite = default;
@@ -20,7 +21,8 @@ public class PanelManager : MonoBehaviour
 
     public ScoreManager scoreManager;
     public Timer timer;
-    
+    [SerializeField] ReadyUI readyUI = default;
+
     // 最後に選んだ文字
     string lastWord;
     string wrongAnswer = "ぜんぜんちがうよ！";
@@ -33,17 +35,9 @@ public class PanelManager : MonoBehaviour
 
     private void Start()
     {
-        Setup();
-    
-        messagePanel.UpdateMessage("「"+lastWord[lastWord.Length - 1] + "」ではじまるのは　どれだ？");
-    }
-
-    void Setup()
-    {
+        resultPanel.HidePanel();
         addScore.gameObject.SetActive(false);
         downTime.gameObject.SetActive(false);
-        SoundManager.instance.PlayBGM(SoundManager.BGM.Main);
-        resultPanel.HidePanel();
         lastWord = "しりとり";
         // 表示用のオブジェクトを取得
         panelCores = panelParent.GetComponentsInChildren<PanelCore>();
@@ -52,7 +46,15 @@ public class PanelManager : MonoBehaviour
         // 反映
         SetPanels(randomDataSet);
         SetHumanPanel(tileListEntity.tileList[0]);
+
+        readyUI.StartAction = Setup;    
+        messagePanel.UpdateMessage("「"+lastWord[lastWord.Length - 1] + "」ではじまるのは　どれだ？");
+    }
+
+    void Setup()
+    {
         timer.StartTime();
+        SoundManager.instance.PlayBGM(SoundManager.BGM.Main);
     }
 
     // データベースのデータ反映
@@ -76,6 +78,7 @@ public class PanelManager : MonoBehaviour
     // データベースからランダムにデータを持ってくる
     Panel[] GetRandomPanelDataSet(TileListEntity database)
     {
+        // UnityEngine.Random.InitState(1);
         // データが壊れないようにコピーする
         List<Panel> databaseCopy = new List<Panel>(database.tileList);
 
@@ -85,7 +88,6 @@ public class PanelManager : MonoBehaviour
         {
             // ランダムに選んで格納
             int r = UnityEngine.Random.Range(1, databaseCopy.Count); // データベースの0には人を入れるから1以上
-            r = 1;
             panels[i] = databaseCopy[r];
             // 選んだものは除外
             databaseCopy.RemoveAt(r);
@@ -103,7 +105,6 @@ public class PanelManager : MonoBehaviour
     public void PanelClickAction(PanelCore panelCore)
     {
         string nextWord = NextWord(panelCore.PanelData);
-        Debug.Log(nextWord);
         if (string.IsNullOrEmpty(nextWord))
         {
             messagePanel.UpdateMessage(wrongAnswer);
@@ -114,21 +115,24 @@ public class PanelManager : MonoBehaviour
         }
         else if (nextWord.EndsWith("ん"))
         {
-            Debug.Log("ゲームオーバー処理");
+            timer.StopTime();
             panelCore.HidePanel(hideSprite);
-            ShowResult();
+            ShowResult(nextWord);
             return;
         }
         else
         {
+            anim.Rewind();
+            anim.Play();
             lastWord = nextWord;
             panelCore.HidePanel(hideSprite);
-            messagePanel.UpdateMessage(nextWord + "なのか！！");
+            messagePanel.UpdateMessage("「"+nextWord + "」なのか！！");
             scoreManager.ScoreUp(lastWord.Length);
             addScore.gameObject.SetActive(true);
             addScore.text = "+"+lastWord.Length;
             SoundManager.instance.PlaySE(SoundManager.SE.Correct);
         }
+        StopAllCoroutines();
         StartCoroutine(CorrectText());
     }
 
@@ -155,13 +159,14 @@ public class PanelManager : MonoBehaviour
         return "";
     }
 
-    void ShowResult()
+    void ShowResult(string word = "")
     {
-        resultPanel.ShowPanel();
+        resultPanel.ShowPanel(word);
     }
 
     public void RankingShow()
     {
+        SoundManager.instance.PlaySE(SoundManager.SE.Button);
         naichilab.RankingLoader.Instance.SendScoreAndShowRanking(scoreManager.Score);
     }
 

@@ -27,6 +27,7 @@ public class GameManager : MonoBehaviour
 
     public void LoadScene()
     {
+        SoundManager.instance.PlaySE(SoundManager.SE.Button);
         Scene thisScene = SceneManager.GetActiveScene();
         SceneManager.LoadScene(thisScene.name);
     }
