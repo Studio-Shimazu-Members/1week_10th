@@ -63,6 +63,7 @@ public class Timer : MonoBehaviour
         {
             countTime = 0;
         }
+        UpdateText(countTime);
     }
 
     private void UpdateText(int time)

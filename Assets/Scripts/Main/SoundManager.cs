@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class SoundManager : MonoBehaviour
 {
@@ -8,7 +9,8 @@ public class SoundManager : MonoBehaviour
     [SerializeField] AudioSource audioSourceSE;
     [SerializeField] AudioClip[] bgmList;
     [SerializeField] AudioClip[] seList;
-
+    [SerializeField] Image speakerImage = default;
+    [SerializeField] Sprite[] speakers = default;
     public enum SE
     {
         Correct,
@@ -56,5 +58,21 @@ public class SoundManager : MonoBehaviour
     public void StopBGM()
     {
         audioSourceBGM.Stop();
+    }
+
+    bool mute = false;
+    public void SpeakerMute()
+    {
+        mute = !mute;
+        if (mute)
+        {
+            speakerImage.sprite = speakers[1];
+            AudioListener.volume = 0;
+        }
+        else
+        {
+            speakerImage.sprite = speakers[0];
+            AudioListener.volume = 1;
+        }
     }
 }

@@ -104,6 +104,9 @@ public class PanelManager : MonoBehaviour
     // パネルをクリックした時の処理：この関数をパネルに渡しておく
     public void PanelClickAction(PanelCore panelCore)
     {
+        addScore.gameObject.SetActive(false);
+        downTime.gameObject.SetActive(false);
+
         string nextWord = NextWord(panelCore.PanelData);
         if (string.IsNullOrEmpty(nextWord))
         {
@@ -118,6 +121,8 @@ public class PanelManager : MonoBehaviour
             timer.StopTime();
             panelCore.HidePanel(hideSprite);
             ShowResult(nextWord);
+            lastWord = nextWord;
+            scoreManager.ScoreUp(lastWord.Length);
             return;
         }
         else

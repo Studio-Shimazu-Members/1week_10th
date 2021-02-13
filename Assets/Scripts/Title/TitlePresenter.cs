@@ -7,7 +7,6 @@ using UnityEngine.SceneManagement;
 public class TitlePresenter : MonoBehaviour
 {
     [SerializeField] GameObject[] imageObjs = default;
-    [SerializeField] GameObject[] InversImageObjs = default;
     [SerializeField] string nextScene = default;
     public void Start()
     {
@@ -33,10 +32,6 @@ public class TitlePresenter : MonoBehaviour
             yield return new WaitForSeconds(1f);
 
             foreach (GameObject image in imageObjs)
-            {
-                image.transform.localScale = new Vector3(-1, 1, 1);
-            }
-            foreach (GameObject image in InversImageObjs)
             {
                 image.transform.localScale = new Vector3(-1, 1, 1);
             }
